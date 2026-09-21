@@ -1,0 +1,10 @@
+.venv
+__pycache__/
+*.pyc
+archive/
+_backup_*/
+kaggle_model/kaggle_output/
+backend/data/
+backend/config/
+logs/
+kaggle_model/crowd_counts*.csv
