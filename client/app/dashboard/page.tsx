@@ -178,8 +178,8 @@ export default function Dashboard() {
                   cx="50%"
                   cy="50%"
                   labelLine={false}
-                  label={({ name, percent }) => `${name} ${Math.round((percent ?? 0) * 100)}%`}
-                  outerRadius={80}
+                  label={({ percent }) => `${Math.round((percent ?? 0) * 100)}%`}
+                  outerRadius={90}
                   fill="#8884d8"
                   dataKey="value"
                 >
@@ -188,6 +188,7 @@ export default function Dashboard() {
                   ))}
                 </Pie>
                 <Tooltip />
+                <Legend verticalAlign="bottom" height={48} wrapperStyle={{ fontSize: 12 }} />
               </PieChart>
             </ResponsiveContainer>
           </Card>

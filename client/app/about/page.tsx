@@ -190,81 +190,6 @@ export default function AboutPage() {
           </div>
         </Card>
 
-        {/* Publications & Recognition */}
-        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-8 mb-12">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Publications & Recognition</h2>
-          
-          <div className="space-y-4">
-            {[
-              {
-                title: 'IEEE International Conference on Smart Cities',
-                year: '2024',
-                status: 'Published'
-              },
-              {
-                title: 'ACM Conference on Pervasive and Ubiquitous Computing',
-                year: '2024',
-                status: 'Published'
-              },
-              {
-                title: 'Indian Institute of Technology Bombay Research Review',
-                year: '2023',
-                status: 'Published'
-              },
-              {
-                title: 'National Smart Cities Award - AI Innovation Category',
-                year: '2023',
-                status: 'Finalist'
-              },
-            ].map((pub, idx) => (
-              <div key={idx} className="flex items-start justify-between p-4 bg-gradient-to-r from-white/20 dark:from-white/5 to-white/10 dark:to-white/5 rounded-lg border border-white/40 dark:border-white/10">
-                <div className="flex-1">
-                  <p className="font-semibold text-foreground">{pub.title}</p>
-                  <p className="text-sm text-foreground/60 mt-1">{pub.year}</p>
-                </div>
-                <span className={`text-xs font-bold px-3 py-1 rounded-full ${
-                  pub.status === 'Published' 
-                    ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300'
-                    : 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
-                }`}>
-                  {pub.status}
-                </span>
-              </div>
-            ))}
-          </div>
-        </Card>
-
-        {/* Team & Expertise */}
-        <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 rounded-2xl p-8 mb-12">
-          <h2 className="text-2xl font-bold text-foreground mb-6">Expert Team & Credentials</h2>
-          
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              {
-                role: 'Machine Learning Lead',
-                credentials: 'Ph.D. Computer Vision, IIT-B | 10+ years AI/ML',
-              },
-              {
-                role: 'Data Engineering',
-                credentials: 'Data Architect, Google Cloud | 12+ years infrastructure',
-              },
-              {
-                role: 'Crowd Dynamics Expert',
-                credentials: 'Ph.D. Physics, MIT | Research at Disney Park Analytics',
-              },
-              {
-                role: 'Product & Strategy',
-                credentials: 'Ex-Director Smart Cities, Ministry of Urban Development',
-              },
-            ].map((member, idx) => (
-              <div key={idx} className="bg-white/60 dark:bg-card/60 rounded-lg p-4 border border-white/80 dark:border-white/10">
-                <p className="font-bold text-foreground text-sm">{member.role}</p>
-                <p className="text-xs text-foreground/70 mt-2">{member.credentials}</p>
-              </div>
-            ))}
-          </div>
-        </Card>
-
         {/* Future Roadmap */}
         <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-foreground mb-6">Future Roadmap</h2>
@@ -300,8 +225,10 @@ export default function AboutPage() {
             <Button className="bg-primary hover:bg-primary/90 h-12 rounded-xl font-semibold">
               Request Partnership
             </Button>
-            <Button variant="outline" className="h-12 rounded-xl font-semibold">
-              Download Research Paper
+            <Button asChild variant="outline" className="h-12 rounded-xl font-semibold">
+              <a href="https://drive.google.com/file/d/1ULukb8ZmLiu3sVB-kn6UJbqBnwX8CjrT/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+                See Research Paper
+              </a>
             </Button>
           </div>
         </Card>

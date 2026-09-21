@@ -70,8 +70,13 @@ def images_available() -> bool:
     return IMAGES_DIR.is_dir() and any(IMAGES_DIR.glob("*.jpg"))
 
 
-def frame_bytes(camera: dict) -> bytes:
-    row = choose(camera.get("url") or "generic", camera.get("zone_capacity") or 300, datetime.utcnow())
+def random_row() -> dict:
+    """Any test image from the dataset, uniformly at random (used by the manual "Capture now" button)."""
+    return random.choice(_images())
+
+
+def frame_bytes(camera: dict, randomize: bool = False) -> bytes:
+    row = random_row() if randomize else choose(camera.get("url") or "generic", camera.get("zone_capacity") or 300, datetime.utcnow())
     path = IMAGES_DIR / row["image"]
     if not path.exists():
         raise ValueError(f"demo image not found: {path} (set DEMO_IMAGES_DIR to the ShanghaiTech part_B/test_data/images folder)")

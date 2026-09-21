@@ -64,12 +64,12 @@ def mark_error(camera_id: int, message: str) -> None:
         c.execute("UPDATE cameras SET last_polled_at=?, last_status='error', last_error=? WHERE id=?", (db.now_iso(), message[:300], camera_id))
 
 
-def replay_reading(camera: dict, store: bool = True) -> dict:
+def replay_reading(camera: dict, store: bool = True, randomize: bool = False) -> dict:
     """Demo camera without the ShanghaiTech images on disk: store the CSRNet count already measured on the chosen test image."""
     from datetime import datetime, timezone
 
     cam, temple = load_camera(camera["id"])
-    row = demo_feed.choose(cam.get("url") or "generic", cam.get("zone_capacity") or 300, datetime.now(timezone.utc))
+    row = demo_feed.random_row() if randomize else demo_feed.choose(cam.get("url") or "generic", cam.get("zone_capacity") or 300, datetime.now(timezone.utc))
     warn, crit = levels_for(cam, temple)
     count = row["predicted"]
     level = "Safe" if count < warn else "Warning" if count < crit else "Critical"
@@ -85,13 +85,13 @@ def replay_reading(camera: dict, store: bool = True) -> dict:
     return {"ts": ts, "camera_id": cam["id"], "temple_id": cam["temple_id"], "count": count, "level": level, "source": "replay", "stored": store}
 
 
-def capture_camera(camera_id: int, store: bool = True) -> dict:
+def capture_camera(camera_id: int, store: bool = True, randomize: bool = False) -> dict:
     """Pull one frame from the camera source, analyse it and (optionally) store the reading."""
     cam, _ = load_camera(camera_id)
     try:
         if cam["source_type"] == "demo" and not demo_feed.images_available():
-            return replay_reading(cam, store)
-        frame = grab_frame(cam)
+            return replay_reading(cam, store, randomize)
+        frame = grab_frame(cam, randomize)
         return process_frame(camera_id, frame, store)
     except Exception as exc:
         mark_error(camera_id, str(exc))

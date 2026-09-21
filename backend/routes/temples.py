@@ -233,7 +233,7 @@ def capture_now(camera_id: int, store: bool = Query(True, description="false = t
     if cam["source_type"] == "push":
         raise HTTPException(status_code=400, detail="Push cameras send their own frames to the ingest URL; nothing to pull.")
     try:
-        return capture_camera(camera_id, store)
+        return capture_camera(camera_id, store, randomize=True)  # manual click: random dataset image for demo cameras
     except Exception as exc:
         raise HTTPException(status_code=502, detail=f"Could not read the camera: {exc}") from exc
 

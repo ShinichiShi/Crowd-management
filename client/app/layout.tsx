@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem storageKey="pilgrimsafe-theme" themes={['light', 'dark']} disableTransitionOnChange>
           {children}
           <ThemeToggle />
         </ThemeProvider>

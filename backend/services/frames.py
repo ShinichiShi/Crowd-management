@@ -84,7 +84,7 @@ def _cv2_frame(source: str | int, pick_by_time: bool = False, interval: int = 60
         cap.release()
 
 
-def grab_frame(camera: dict) -> bytes:
+def grab_frame(camera: dict, randomize: bool = False) -> bytes:
     kind, url = camera["source_type"], camera.get("url")
     if kind == "snapshot":
         return _http_get(url)
@@ -95,7 +95,7 @@ def grab_frame(camera: dict) -> bytes:
     if kind == "demo":
         from services.demo_feed import frame_bytes
 
-        return frame_bytes(camera)
+        return frame_bytes(camera, randomize)
     if kind == "file":
         path = Path(url).expanduser()
         if path.suffix.lower() in IMAGE_EXT:
