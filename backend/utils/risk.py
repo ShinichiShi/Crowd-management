@@ -14,3 +14,17 @@ def evaluate_risk(current: float, predicted: float, previous: float) -> tuple[fl
         level = "Critical"
 
     return risk_score, level
+
+
+def count_level(count: float, warn: float | None = None, crit: float | None = None) -> str:
+    """Safe < warn <= Warning < crit <= Critical. Defaults come from utils.thresholds (100 / 200 people)."""
+    if warn is None or crit is None:
+        from utils import thresholds
+
+        t = thresholds.get()
+        warn, crit = t["warn"], t["crit"]
+    if count < warn:
+        return "Safe"
+    if count < crit:
+        return "Warning"
+    return "Critical"

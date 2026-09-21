@@ -9,6 +9,9 @@ from pathlib import Path
 class Settings:
     project_name: str = "Smart Crowd Management Backend"
     api_prefix: str = ""
+    demo_prefix: str = "/demo"
+    tta: bool = os.getenv("TTA", "1") != "0"
+    demo_fallback: bool = os.getenv("DEMO_FALLBACK", "1") != "0"
     cors_origins: tuple[str, ...] = ("*",)
     model_dir: Path = Path(__file__).resolve().parent.parent / "models"
     csrnet_path: Path = model_dir / "csrnet_model.pth"

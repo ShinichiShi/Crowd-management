@@ -20,9 +20,9 @@ class CSRNet(nn.Module):
         frontend_features = list(vgg16.features.children())[:23]
         self.frontend = nn.Sequential(*frontend_features)
         self.backend = self._make_layers(
-            [512, 512, 512, 256, 128, 64], in_channels=512, dilation=True
+            [512, 256, 128, 64], in_channels=512, dilation=True
         )
-        self.output_layer = nn.Conv2d(64, 1, kernel_size=1)
+        self.backend.append(nn.Conv2d(64, 1, kernel_size=1))
 
     def _make_layers(
         self, cfg: list[int], in_channels: int, dilation: bool = False
@@ -46,7 +46,6 @@ class CSRNet(nn.Module):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         x = self.frontend(x)
         x = self.backend(x)
-        x = self.output_layer(x)
         return x
 
 
@@ -59,8 +58,10 @@ class CrowdLSTM(nn.Module):
         hidden_size: int = 64,
         num_layers: int = 2,
         dropout: float = 0.0,
+        residual: bool = False,
     ) -> None:
         super().__init__()
+        self.residual = residual
         self.lstm = nn.LSTM(
             input_size=input_size,
             hidden_size=hidden_size,
@@ -68,12 +69,14 @@ class CrowdLSTM(nn.Module):
             batch_first=True,
             dropout=dropout if num_layers > 1 else 0.0,
         )
-        self.head = nn.Linear(hidden_size, 1)
+        self.fc = nn.Linear(hidden_size, 1)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         output, _ = self.lstm(x)
-        last_step = output[:, -1, :]
-        return self.head(last_step)
+        out = self.fc(output[:, -1, :])
+        if self.residual:
+            out = out + x[:, -1, :1]
+        return out
 
 
 def get_device() -> torch.device:

@@ -1,0 +1,158 @@
+{
+  "csrnet": {
+    "Part A | optimised (EMA)": {
+      "MAE": 71.21249764830202,
+      "RMSE": 116.16576919294621,
+      "MAPE": 16.71124960440408,
+      "R2": 0.8919893559849965
+    },
+    "Part A | optimised + flip-TTA": {
+      "MAE": 71.11489300151447,
+      "RMSE": 116.18830681996104,
+      "MAPE": 16.724825188711144,
+      "R2": 0.8919474410600029
+    },
+    "Part A | original recipe": {
+      "MAE": 166.03268192626618,
+      "RMSE": 232.92550106372207,
+      "MAPE": 50.91204795943924,
+      "R2": 0.5657455400777185
+    },
+    "Part B | optimised (EMA)": {
+      "MAE": 12.90465421314481,
+      "RMSE": 24.635802352924266,
+      "MAPE": 10.386428904236082,
+      "R2": 0.9329378008836897
+    },
+    "Part B | optimised + flip-TTA": {
+      "MAE": 12.704406430449668,
+      "RMSE": 24.218634490794148,
+      "MAPE": 10.186887215834274,
+      "R2": 0.9351897533724265
+    },
+    "Part B | original recipe": {
+      "MAE": 45.98673063592066,
+      "RMSE": 68.22443757823444,
+      "MAPE": 54.364415262506206,
+      "R2": 0.48569079567401974
+    }
+  },
+  "usecase": {
+    "CSRNet only (reactive)": {
+      "MAE": 35.1577801126,
+      "RMSE": 54.1056794747,
+      "MAPE": 38.7445008322,
+      "R2": 0.5355639612,
+      "risk_acc": 0.7185354691,
+      "crit_precision": 0.5901639344,
+      "crit_recall": 0.4931506849,
+      "surge_onsets": 92.0,
+      "onsets_caught": 0.0,
+      "false_alarms": 75.0
+    },
+    "CSRNet + moving avg (3h)": {
+      "MAE": 48.79611003,
+      "RMSE": 68.0718200998,
+      "MAPE": 61.8635925512,
+      "R2": 0.2648517508,
+      "risk_acc": 0.6704805492,
+      "crit_precision": 0.4700854701,
+      "crit_recall": 0.2511415525,
+      "surge_onsets": 92.0,
+      "onsets_caught": 1.0,
+      "false_alarms": 62.0
+    },
+    "CSRNet + seasonal (24h ago)": {
+      "MAE": 28.8179389043,
+      "RMSE": 48.6373988168,
+      "MAPE": 21.6503860144,
+      "R2": 0.6246979971,
+      "risk_acc": 0.7871853547,
+      "crit_precision": 0.6338797814,
+      "crit_recall": 0.5296803653,
+      "surge_onsets": 92.0,
+      "onsets_caught": 38.0,
+      "false_alarms": 67.0
+    },
+    "CSRNet + LSTM (predictive)": {
+      "MAE": 12.1096473318,
+      "RMSE": 21.8187378399,
+      "MAPE": 9.8022470516,
+      "R2": 0.9244734843,
+      "risk_acc": 0.9267734554,
+      "crit_precision": 0.8509615385,
+      "crit_recall": 0.8082191781,
+      "surge_onsets": 92.0,
+      "onsets_caught": 63.0,
+      "false_alarms": 31.0
+    }
+  },
+  "lstm_variants": {
+    "univariate (run-1)": {
+      "MAE": 13.6997660456,
+      "RMSE": 23.5900913939,
+      "MAPE": 11.4119487025,
+      "R2": 0.9117124534,
+      "val_loss": 0.0027141367,
+      "crit_recall": 0.7579908676,
+      "onsets_caught": 55.0,
+      "false_alarms": 38.0
+    },
+    "+ residual output": {
+      "MAE": 13.7453303188,
+      "RMSE": 23.7134213599,
+      "MAPE": 11.5868529887,
+      "R2": 0.9107868985,
+      "val_loss": 0.0028511268,
+      "crit_recall": 0.7579908676,
+      "onsets_caught": 55.0,
+      "false_alarms": 32.0
+    },
+    "+ time-of-day features": {
+      "MAE": 12.1096473318,
+      "RMSE": 21.8187378399,
+      "MAPE": 9.8022470516,
+      "R2": 0.9244734843,
+      "val_loss": 0.0020414565,
+      "crit_recall": 0.8082191781,
+      "onsets_caught": 63.0,
+      "false_alarms": 31.0
+    },
+    "+ time features + resid": {
+      "MAE": 12.3902634738,
+      "RMSE": 21.6670816271,
+      "MAPE": 10.3203288757,
+      "R2": 0.9255197646,
+      "val_loss": 0.0020597342,
+      "crit_recall": 0.8584474886,
+      "onsets_caught": 68.0,
+      "false_alarms": 36.0
+    },
+    "+ time + resid + peak-wt": {
+      "MAE": 12.6731185047,
+      "RMSE": 22.0618999831,
+      "MAPE": 10.8510250495,
+      "R2": 0.9227806709,
+      "val_loss": 0.0021227316,
+      "crit_recall": 0.8584474886,
+      "onsets_caught": 68.0,
+      "false_alarms": 35.0
+    }
+  },
+  "selected_lstm": "+ time-of-day features",
+  "lstm_config": {
+    "input_size": 5,
+    "hidden_size": 64,
+    "num_layers": 2,
+    "dropout": 0.1,
+    "sequence_length": 24,
+    "residual": false,
+    "time_features": true,
+    "step_minutes": 60
+  },
+  "parts": [
+    "A",
+    "B"
+  ],
+  "epochs": 100
+}

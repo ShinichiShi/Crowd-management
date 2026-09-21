@@ -19,3 +19,13 @@ Example lstm_scaler.json (z-score):
   "mean": 12000,
   "std": 4000
 }
+
+## Installing new weights
+
+Train with `kaggle_model/crowd-counting-optimised-v2.ipynb`, download the notebook output, then:
+
+```bash
+python backend/scripts/install_models.py <folder-or-zip> --figures
+```
+
+This backs up the current files, installs the new ones, verifies they load with the backend code and copies the result CSVs to `results/`.

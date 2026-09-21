@@ -1,0 +1,7 @@
+task,model,MAE,RMSE,MAPE,accuracy_pct,R2,within_10pct,within_20pct,risk_level_accuracy
+CSRNet count - Part A test (182 images),optimised + flip-TTA,71.115,116.188,16.725,83.275,0.892,41.209,68.681,88.462
+CSRNet count - Part B test (316 images),optimised + flip-TTA,12.704,24.219,10.187,89.813,0.935,64.241,91.456,92.089
+Next-hour forecast (1311 test hours),CSRNet only (reactive),35.158,54.106,38.745,61.255,0.536,26.697,53.852,71.854
+Next-hour forecast (1311 test hours),CSRNet + moving avg (3h),48.796,68.072,61.864,38.136,0.265,20.9,41.114,67.048
+Next-hour forecast (1311 test hours),CSRNet + seasonal (24h ago),28.818,48.637,21.65,78.35,0.625,29.062,56.064,78.719
+Next-hour forecast (1311 test hours),CSRNet + LSTM (predictive),12.11,21.819,9.802,90.198,0.924,61.175,90.77,92.677
