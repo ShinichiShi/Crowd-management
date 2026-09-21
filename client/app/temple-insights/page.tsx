@@ -70,9 +70,9 @@ export default function TempleInsightsPage() {
   const temple = templeData[selectedTemple];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-emerald-50/30 to-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-emerald-50/30 dark:via-emerald-950/20 to-background">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-border">
+      <div className="sticky top-0 z-40 bg-white/80 dark:bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4">
           <Button asChild variant="ghost" size="sm">
             <Link href="/" className="gap-2">
@@ -97,7 +97,7 @@ export default function TempleInsightsPage() {
               className={`px-6 py-3 rounded-xl font-semibold transition-all ${
                 selectedTemple === key
                   ? 'bg-primary text-white shadow-lg'
-                  : 'bg-white border border-border text-foreground hover:border-primary'
+                  : 'bg-white dark:bg-card border border-border text-foreground hover:border-primary'
               }`}
             >
               {templeData[key].name}
@@ -107,7 +107,7 @@ export default function TempleInsightsPage() {
 
         {/* Temple Overview */}
         <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+          <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm text-foreground/60 mb-2">Current Visitors</p>
@@ -118,7 +118,7 @@ export default function TempleInsightsPage() {
             </div>
           </Card>
 
-          <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+          <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm text-foreground/60 mb-2">Daily Average</p>
@@ -129,7 +129,7 @@ export default function TempleInsightsPage() {
             </div>
           </Card>
 
-          <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+          <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6">
             <div className="flex items-start justify-between">
               <div>
                 <p className="text-sm text-foreground/60 mb-2">Accessibility Score</p>
@@ -142,17 +142,17 @@ export default function TempleInsightsPage() {
         </div>
 
         {/* Weekly Footfall */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6 mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-6">Weekly Footfall Pattern</h2>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={temple.stats}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="day" stroke="#6b7280" style={{ fontSize: '12px' }} />
-              <YAxis stroke="#6b7280" style={{ fontSize: '12px' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="day" stroke="var(--muted-foreground)" style={{ fontSize: '12px' }} />
+              <YAxis stroke="var(--muted-foreground)" style={{ fontSize: '12px' }} />
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: '#fff', 
-                  border: '1px solid #e5e7eb',
+                  backgroundColor: 'var(--card)', color: 'var(--foreground)', 
+                  border: '1px solid var(--border)',
                   borderRadius: '8px'
                 }}
               />
@@ -162,37 +162,37 @@ export default function TempleInsightsPage() {
         </Card>
 
         {/* Festival Comparison */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6 mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-6">Festival Surge Impact (3 Years)</h2>
           <ResponsiveContainer width="100%" height={300}>
             <LineChart data={temple.festival}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="festival" stroke="#6b7280" style={{ fontSize: '12px' }} />
-              <YAxis stroke="#6b7280" style={{ fontSize: '12px' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="festival" stroke="var(--muted-foreground)" style={{ fontSize: '12px' }} />
+              <YAxis stroke="var(--muted-foreground)" style={{ fontSize: '12px' }} />
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: '#fff', 
-                  border: '1px solid #e5e7eb',
+                  backgroundColor: 'var(--card)', color: 'var(--foreground)', 
+                  border: '1px solid var(--border)',
                   borderRadius: '8px'
                 }}
               />
               <Legend />
               <Line type="monotone" dataKey="2022" stroke="#EA6E3C" strokeWidth={2} name="2022" />
-              <Line type="monotone" dataKey="2023" stroke="#4C3A7F" strokeWidth={2} name="2023" />
+              <Line type="monotone" dataKey="2023" stroke="var(--secondary)" strokeWidth={2} name="2023" />
               <Line type="monotone" dataKey="2024" stroke="#10B981" strokeWidth={2} name="2024" />
             </LineChart>
           </ResponsiveContainer>
         </Card>
 
         {/* Accessibility & Safety */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6 mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-6">Accessibility & Safety Features</h2>
           <div className="grid md:grid-cols-2 gap-4">
             {accessibilityFeatures.map((item, idx) => (
-              <div key={idx} className="p-4 bg-gradient-to-r from-emerald-50 to-blue-50 rounded-xl border border-emerald-100">
+              <div key={idx} className="p-4 bg-gradient-to-r from-emerald-50 dark:from-emerald-950/30 to-blue-50 dark:to-blue-950/30 rounded-xl border border-emerald-100 dark:border-emerald-900">
                 <div className="flex items-start justify-between mb-2">
                   <p className="font-semibold text-foreground">{item.feature}</p>
-                  <span className="text-emerald-600 font-bold">{item.status}</span>
+                  <span className="text-emerald-600 dark:text-emerald-400 font-bold">{item.status}</span>
                 </div>
                 <p className="text-sm text-foreground/70">{item.description}</p>
               </div>
@@ -238,12 +238,12 @@ export default function TempleInsightsPage() {
         </div>
 
         {/* Heatmap Section */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6 mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-6">Crowd Density Heatmap</h2>
-          <div className="bg-gradient-to-br from-blue-100 via-green-100 to-red-100 rounded-xl p-1 h-96 flex items-center justify-center relative overflow-hidden">
+          <div className="bg-gradient-to-br from-blue-100 dark:from-blue-900/30 via-green-100 dark:via-green-950/30 to-red-100 rounded-xl p-1 h-96 flex items-center justify-center relative overflow-hidden">
             <svg className="w-full h-full absolute inset-0" viewBox="0 0 400 300">
               {/* Temple layout representation */}
-              <rect x="50" y="30" width="300" height="240" fill="none" stroke="#4C3A7F" strokeWidth="2" />
+              <rect x="50" y="30" width="300" height="240" fill="none" stroke="var(--secondary)" strokeWidth="2" />
               {/* Entry point */}
               <rect x="50" y="260" width="60" height="20" fill="#10B981" opacity="0.6" />
               {/* Main prayer area */}
@@ -287,7 +287,7 @@ export default function TempleInsightsPage() {
           <Button asChild className="bg-primary hover:bg-primary/90 h-12 rounded-xl font-semibold">
             <Link href="/dashboard">Back to Dashboard →</Link>
           </Button>
-          <Button asChild className="bg-secondary hover:bg-secondary/90 h-12 rounded-xl font-semibold text-white">
+          <Button asChild className="bg-secondary hover:bg-secondary/90 h-12 rounded-xl font-semibold text-white dark:text-secondary-foreground">
             <Link href="/accessibility">Safety & Accessibility →</Link>
           </Button>
           <Button asChild variant="outline" className="h-12 rounded-xl font-semibold">

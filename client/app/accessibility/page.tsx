@@ -84,9 +84,9 @@ const guidelines = [
 
 export default function AccessibilityPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-emerald-50/30 to-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-emerald-50/30 dark:via-emerald-950/20 to-background">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-border">
+      <div className="sticky top-0 z-40 bg-white/80 dark:bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4">
           <Button asChild variant="ghost" size="sm">
             <Link href="/" className="gap-2">
@@ -113,7 +113,7 @@ export default function AccessibilityPage() {
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           {services.map((service, idx) => (
-            <Card key={idx} className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6 hover:shadow-lg transition-all">
+            <Card key={idx} className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6 hover:shadow-lg transition-all">
               <div className="flex items-start gap-4 mb-4">
                 <div className="w-12 h-12 bg-primary/20 rounded-xl flex items-center justify-center flex-shrink-0">
                   <service.icon className="w-6 h-6 text-primary" />
@@ -141,16 +141,16 @@ export default function AccessibilityPage() {
         {/* Emergency Contacts */}
         <Card className="bg-gradient-to-r from-red-50/50 to-orange-50/50 border border-red-200/50 rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-foreground mb-2 flex items-center gap-2">
-            <Phone className="w-6 h-6 text-red-600" />
+            <Phone className="w-6 h-6 text-red-600 dark:text-red-400" />
             Emergency Contacts & Support
           </h2>
           <p className="text-foreground/70 mb-6">Available 24/7 for immediate assistance</p>
           
           <div className="grid sm:grid-cols-2 gap-4">
             {emergencyContacts.map((contact, idx) => (
-              <div key={idx} className="bg-white/60 rounded-xl p-4 border border-white/80 backdrop-blur-sm">
+              <div key={idx} className="bg-white/60 dark:bg-card/60 rounded-xl p-4 border border-white/80 dark:border-white/10 backdrop-blur-sm">
                 <p className="text-sm font-semibold text-foreground">{contact.name}</p>
-                <p className="text-xl font-mono text-red-600 font-bold mt-2">{contact.number}</p>
+                <p className="text-xl font-mono text-red-600 dark:text-red-400 font-bold mt-2">{contact.number}</p>
                 <p className="text-xs text-foreground/60 mt-2">Response time: {contact.responseTime}</p>
               </div>
             ))}
@@ -162,7 +162,7 @@ export default function AccessibilityPage() {
           <h2 className="text-2xl font-bold text-foreground mb-6">Visitor Guidelines</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {guidelines.map((guide, idx) => (
-              <Card key={idx} className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+              <Card key={idx} className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6">
                 <h3 className="font-bold text-foreground mb-4 flex items-center gap-2">
                   <MapPin className="w-5 h-5 text-primary" />
                   {guide.category}
@@ -181,7 +181,7 @@ export default function AccessibilityPage() {
         </div>
 
         {/* Facility Features */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-8 mb-12">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-foreground mb-8">Facility Features & Infrastructure</h2>
           
           <div className="grid md:grid-cols-3 gap-6">
@@ -211,7 +211,7 @@ export default function AccessibilityPage() {
                 items: ['CCTV coverage', 'Security personnel', 'Lost child assistance', '24/7 patrol']
               },
             ].map((facility, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-blue-50 to-emerald-50 rounded-xl p-4 border border-blue-100">
+              <div key={idx} className="bg-gradient-to-br from-blue-50 to-emerald-50 rounded-xl p-4 border border-blue-100 dark:border-blue-900">
                 <p className="font-semibold text-foreground mb-3">{facility.title}</p>
                 <ul className="space-y-2">
                   {facility.items.map((item, iidx) => (
@@ -235,7 +235,7 @@ export default function AccessibilityPage() {
               { standard: 'UDHR Article 25', level: 'Compliant', description: 'Universal human rights' },
               { standard: 'India Accessibility Code', level: 'Certified', description: 'National standards' },
             ].map((cert, idx) => (
-              <div key={idx} className="bg-white/60 rounded-xl p-4 border border-white/80 text-center">
+              <div key={idx} className="bg-white/60 dark:bg-card/60 rounded-xl p-4 border border-white/80 dark:border-white/10 text-center">
                 <p className="font-bold text-primary text-sm">{cert.standard}</p>
                 <p className="font-semibold text-foreground mt-2">{cert.level}</p>
                 <p className="text-xs text-foreground/60 mt-1">{cert.description}</p>
@@ -245,7 +245,7 @@ export default function AccessibilityPage() {
         </Card>
 
         {/* Feedback & Support */}
-        <Card className="bg-gradient-to-r from-emerald-50 to-blue-50 border border-emerald-200/50 rounded-2xl p-8 mb-12">
+        <Card className="bg-gradient-to-r from-emerald-50 dark:from-emerald-950/30 to-blue-50 dark:to-blue-950/30 border border-emerald-200/50 rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-foreground mb-4">Your Feedback Matters</h2>
           <p className="text-foreground/70 mb-6">
             We continuously improve our accessibility features based on visitor feedback. If you have any suggestions or accessibility concerns during your visit, please don't hesitate to reach out to our support team.
@@ -260,7 +260,7 @@ export default function AccessibilityPage() {
           <Button asChild className="bg-primary hover:bg-primary/90 h-12 rounded-xl font-semibold">
             <Link href="/dashboard">Back to Dashboard →</Link>
           </Button>
-          <Button asChild className="bg-secondary hover:bg-secondary/90 h-12 rounded-xl font-semibold text-white">
+          <Button asChild className="bg-secondary hover:bg-secondary/90 h-12 rounded-xl font-semibold text-white dark:text-secondary-foreground">
             <Link href="/temple-insights">Temple Insights →</Link>
           </Button>
           <Button asChild variant="outline" className="h-12 rounded-xl font-semibold">

@@ -4,9 +4,11 @@ import Link from 'next/link';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Target, Zap } from 'lucide-react';
+import { useApi } from '@/lib/use-api';
+import { SourceBadge } from '@/components/source-badge';
 import { AreaChart, Area, BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-const historicalData = [
+const fallbackHistoricalData = [
   { month: 'Jan', actual: 2400, predicted: 2210, accuracy: 92 },
   { month: 'Feb', actual: 3210, predicted: 2990, accuracy: 94 },
   { month: 'Mar', actual: 2290, predicted: 2000, accuracy: 88 },
@@ -15,25 +17,35 @@ const historicalData = [
   { month: 'Jun', actual: 2590, predicted: 2100, accuracy: 97 },
 ];
 
-const festivalData = [
+const fallbackFestivalData = [
   { festival: 'Diwali', 2022: 4500, 2023: 5200, 2024: 5800 },
   { festival: 'Navratri', 2022: 3800, 2023: 4200, 2024: 4900 },
   { festival: 'Holi', 2022: 3200, 2023: 3600, 2024: 4100 },
   { festival: 'Janmashtami', 2022: 2800, 2023: 3100, 2024: 3500 },
 ];
 
-const accuracyMetrics = [
+const fallbackAccuracyMetrics = [
   { metric: 'MAE (Mean Absolute Error)', value: '±245 people', description: 'Average prediction variance' },
   { metric: 'RMSE (Root Mean Squared Error)', value: '312', description: 'Standard deviation of errors' },
   { metric: 'Model Accuracy', value: '99.2%', description: 'Overall prediction success rate' },
   { metric: 'Peak Hour Accuracy', value: '97.8%', description: 'Accuracy during high traffic' },
 ];
 
+interface AnalyticsPayload {
+  historical_data: typeof fallbackHistoricalData;
+  festival_data: typeof fallbackFestivalData;
+  accuracy_metrics: typeof fallbackAccuracyMetrics;
+}
+
 export default function Analytics() {
+  const { data, source } = useApi<AnalyticsPayload>('/analytics-data');
+  const historicalData = data?.historical_data ?? fallbackHistoricalData;
+  const festivalData = data?.festival_data ?? fallbackFestivalData;
+  const accuracyMetrics = data?.accuracy_metrics ?? fallbackAccuracyMetrics;
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-purple-50/30 to-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-purple-50/30 dark:via-purple-950/20 to-background">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-border">
+      <div className="sticky top-0 z-40 bg-white/80 dark:bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4">
           <Button asChild variant="ghost" size="sm">
             <Link href="/" className="gap-2">
@@ -52,7 +64,7 @@ export default function Analytics() {
         {/* Accuracy Metrics */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
           {accuracyMetrics.map((metric, idx) => (
-            <Card key={idx} className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+            <Card key={idx} className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6">
               <div className="flex items-start justify-between mb-4">
                 <div className="flex-1">
                   <p className="text-xs font-semibold text-primary uppercase tracking-wide">{metric.metric}</p>
@@ -66,7 +78,7 @@ export default function Analytics() {
         </div>
 
         {/* Historical Trends */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6 mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-6">Historical Accuracy & Trends (6 Months)</h2>
           <ResponsiveContainer width="100%" height={350}>
             <AreaChart data={historicalData}>
@@ -76,13 +88,13 @@ export default function Analytics() {
                   <stop offset="95%" stopColor="#10B981" stopOpacity={0}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="month" stroke="#6b7280" style={{ fontSize: '12px' }} />
-              <YAxis stroke="#6b7280" style={{ fontSize: '12px' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="month" stroke="var(--muted-foreground)" style={{ fontSize: '12px' }} />
+              <YAxis stroke="var(--muted-foreground)" style={{ fontSize: '12px' }} />
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: '#fff', 
-                  border: '1px solid #e5e7eb',
+                  backgroundColor: 'var(--card)', color: 'var(--foreground)', 
+                  border: '1px solid var(--border)',
                   borderRadius: '8px'
                 }}
               />
@@ -98,7 +110,7 @@ export default function Analytics() {
               <Area 
                 type="monotone" 
                 dataKey="predicted" 
-                stroke="#4C3A7F" 
+                stroke="var(--secondary)" 
                 fill="#4C3A7F" 
                 fillOpacity={0.1}
                 name="AI Prediction"
@@ -115,17 +127,17 @@ export default function Analytics() {
         </Card>
 
         {/* Festival Comparison */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6 mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-6">Festival-Based Surge Comparison (3 Years)</h2>
           <ResponsiveContainer width="100%" height={350}>
             <BarChart data={festivalData}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-              <XAxis dataKey="festival" stroke="#6b7280" style={{ fontSize: '12px' }} />
-              <YAxis stroke="#6b7280" style={{ fontSize: '12px' }} />
+              <CartesianGrid strokeDasharray="3 3" stroke="var(--border)" />
+              <XAxis dataKey="festival" stroke="var(--muted-foreground)" style={{ fontSize: '12px' }} />
+              <YAxis stroke="var(--muted-foreground)" style={{ fontSize: '12px' }} />
               <Tooltip 
                 contentStyle={{ 
-                  backgroundColor: '#fff', 
-                  border: '1px solid #e5e7eb',
+                  backgroundColor: 'var(--card)', color: 'var(--foreground)', 
+                  border: '1px solid var(--border)',
                   borderRadius: '8px'
                 }}
               />
@@ -169,7 +181,7 @@ export default function Analytics() {
         </div>
 
         {/* Training Metrics */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6 mb-8">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6 mb-8">
           <h2 className="text-lg font-semibold text-foreground mb-6">Model Performance Metrics</h2>
           <div className="grid md:grid-cols-2 gap-6">
             <div>
@@ -180,7 +192,7 @@ export default function Analytics() {
                     <span className="text-sm text-foreground/70">Training Speed</span>
                     <span className="text-sm font-semibold text-primary">94%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div className="h-2 bg-primary rounded-full" style={{ width: '94%' }}></div>
                   </div>
                 </div>
@@ -189,7 +201,7 @@ export default function Analytics() {
                     <span className="text-sm text-foreground/70">Data Quality</span>
                     <span className="text-sm font-semibold text-secondary">98%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div className="h-2 bg-secondary rounded-full" style={{ width: '98%' }}></div>
                   </div>
                 </div>
@@ -198,7 +210,7 @@ export default function Analytics() {
                     <span className="text-sm text-foreground/70">Model Stability</span>
                     <span className="text-sm font-semibold text-emerald-500">96%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div className="h-2 bg-emerald-500 rounded-full" style={{ width: '96%' }}></div>
                   </div>
                 </div>
@@ -213,7 +225,7 @@ export default function Analytics() {
                     <span className="text-sm text-foreground/70">1-Hour Forecast</span>
                     <span className="text-sm font-semibold text-emerald-500">98.5%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div className="h-2 bg-emerald-500 rounded-full" style={{ width: '98.5%' }}></div>
                   </div>
                 </div>
@@ -222,7 +234,7 @@ export default function Analytics() {
                     <span className="text-sm text-foreground/70">6-Hour Forecast</span>
                     <span className="text-sm font-semibold text-emerald-500">97.2%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div className="h-2 bg-emerald-500 rounded-full" style={{ width: '97.2%' }}></div>
                   </div>
                 </div>
@@ -231,7 +243,7 @@ export default function Analytics() {
                     <span className="text-sm text-foreground/70">24-Hour Forecast</span>
                     <span className="text-sm font-semibold text-primary">94.8%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
                     <div className="h-2 bg-primary rounded-full" style={{ width: '94.8%' }}></div>
                   </div>
                 </div>
@@ -245,7 +257,7 @@ export default function Analytics() {
           <Button asChild className="bg-primary hover:bg-primary/90 h-12 rounded-xl font-semibold">
             <Link href="/dashboard">Back to Dashboard →</Link>
           </Button>
-          <Button asChild className="bg-secondary hover:bg-secondary/90 h-12 rounded-xl font-semibold text-white">
+          <Button asChild className="bg-secondary hover:bg-secondary/90 h-12 rounded-xl font-semibold text-white dark:text-secondary-foreground">
             <Link href="/alerts">View Alerts →</Link>
           </Button>
           <Button asChild variant="outline" className="h-12 rounded-xl font-semibold">

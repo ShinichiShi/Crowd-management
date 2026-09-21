@@ -7,9 +7,9 @@ import { ArrowLeft, Brain, Database, Zap, TrendingUp, Code2, BarChart3 } from 'l
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-purple-50/30 to-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-purple-50/30 dark:via-purple-950/20 to-background">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white/80 backdrop-blur-xl border-b border-border">
+      <div className="sticky top-0 z-40 bg-white/80 dark:bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center gap-4">
           <Button asChild variant="ghost" size="sm">
             <Link href="/" className="gap-2">
@@ -34,7 +34,7 @@ export default function AboutPage() {
         </Card>
 
         {/* System Architecture */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-8 mb-12">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-foreground mb-8">Hybrid CNN + LSTM Architecture</h2>
           
           <div className="mb-8">
@@ -47,17 +47,17 @@ export default function AboutPage() {
           <div className="bg-gradient-to-br from-slate-100 to-slate-50 rounded-xl p-8 mb-8 border border-slate-200">
             <div className="space-y-6">
               <div className="flex items-center gap-4">
-                <div className="flex-1 bg-blue-100 border border-blue-300 rounded-lg p-4 text-center">
+                <div className="flex-1 bg-blue-100 dark:bg-blue-900/40 border border-blue-300 rounded-lg p-4 text-center">
                   <p className="font-semibold text-blue-900">Input Layer</p>
-                  <p className="text-sm text-blue-700 mt-1">Real-time sensor data, GPS, historical patterns</p>
+                  <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">Real-time sensor data, GPS, historical patterns</p>
                 </div>
                 <div className="text-2xl text-foreground/50">→</div>
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="flex-1 bg-purple-100 border border-purple-300 rounded-lg p-4 text-center">
+                <div className="flex-1 bg-purple-100 dark:bg-purple-900/40 border border-purple-300 rounded-lg p-4 text-center">
                   <p className="font-semibold text-purple-900">CNN Layer</p>
-                  <p className="text-sm text-purple-700 mt-1">Spatial pattern recognition from heatmaps</p>
+                  <p className="text-sm text-purple-700 dark:text-purple-300 mt-1">Spatial pattern recognition from heatmaps</p>
                 </div>
                 <div className="text-2xl text-foreground/50">→</div>
               </div>
@@ -71,9 +71,9 @@ export default function AboutPage() {
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="flex-1 bg-emerald-100 border border-emerald-300 rounded-lg p-4 text-center">
+                <div className="flex-1 bg-emerald-100 dark:bg-emerald-900/40 border border-emerald-300 rounded-lg p-4 text-center">
                   <p className="font-semibold text-emerald-900">Output Layer</p>
-                  <p className="text-sm text-emerald-700 mt-1">24-hour crowd predictions, risk assessment</p>
+                  <p className="text-sm text-emerald-700 dark:text-emerald-300 mt-1">24-hour crowd predictions, risk assessment</p>
                 </div>
               </div>
             </div>
@@ -86,7 +86,7 @@ export default function AboutPage() {
               { title: 'Training Data', value: '2.5M+', description: 'Data points analyzed' },
               { title: 'Inference Speed', value: '24ms', description: 'Per prediction' },
             ].map((spec, idx) => (
-              <div key={idx} className="bg-gradient-to-br from-white/40 to-white/20 rounded-lg p-4 border border-white/60">
+              <div key={idx} className="bg-gradient-to-br from-white/40 to-white/20 dark:to-white/5 rounded-lg p-4 border border-white/60 dark:border-white/10">
                 <p className="text-sm font-semibold text-primary uppercase tracking-wide">{spec.title}</p>
                 <p className="text-2xl font-bold text-foreground mt-2">{spec.value}</p>
                 <p className="text-xs text-foreground/60 mt-1">{spec.description}</p>
@@ -131,7 +131,7 @@ export default function AboutPage() {
                 description: 'Comprehensive dashboards with real-time metrics and historical trend analysis'
               },
             ].map((feature, idx) => (
-              <Card key={idx} className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-6">
+              <Card key={idx} className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6">
                 <feature.icon className="w-8 h-8 text-primary mb-3" />
                 <h3 className="font-semibold text-foreground mb-2">{feature.title}</h3>
                 <p className="text-sm text-foreground/70">{feature.description}</p>
@@ -191,7 +191,7 @@ export default function AboutPage() {
         </Card>
 
         {/* Publications & Recognition */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-8 mb-12">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-foreground mb-6">Publications & Recognition</h2>
           
           <div className="space-y-4">
@@ -217,15 +217,15 @@ export default function AboutPage() {
                 status: 'Finalist'
               },
             ].map((pub, idx) => (
-              <div key={idx} className="flex items-start justify-between p-4 bg-gradient-to-r from-white/20 to-white/10 rounded-lg border border-white/40">
+              <div key={idx} className="flex items-start justify-between p-4 bg-gradient-to-r from-white/20 dark:from-white/5 to-white/10 dark:to-white/5 rounded-lg border border-white/40 dark:border-white/10">
                 <div className="flex-1">
                   <p className="font-semibold text-foreground">{pub.title}</p>
                   <p className="text-sm text-foreground/60 mt-1">{pub.year}</p>
                 </div>
                 <span className={`text-xs font-bold px-3 py-1 rounded-full ${
                   pub.status === 'Published' 
-                    ? 'bg-emerald-100 text-emerald-700'
-                    : 'bg-blue-100 text-blue-700'
+                    ? 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300'
+                    : 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300'
                 }`}>
                   {pub.status}
                 </span>
@@ -257,7 +257,7 @@ export default function AboutPage() {
                 credentials: 'Ex-Director Smart Cities, Ministry of Urban Development',
               },
             ].map((member, idx) => (
-              <div key={idx} className="bg-white/60 rounded-lg p-4 border border-white/80">
+              <div key={idx} className="bg-white/60 dark:bg-card/60 rounded-lg p-4 border border-white/80 dark:border-white/10">
                 <p className="font-bold text-foreground text-sm">{member.role}</p>
                 <p className="text-xs text-foreground/70 mt-2">{member.credentials}</p>
               </div>
@@ -266,7 +266,7 @@ export default function AboutPage() {
         </Card>
 
         {/* Future Roadmap */}
-        <Card className="bg-white/50 backdrop-blur-sm border border-white/60 rounded-2xl p-8 mb-12">
+        <Card className="bg-white/50 dark:bg-card/50 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-8 mb-12">
           <h2 className="text-2xl font-bold text-foreground mb-6">Future Roadmap</h2>
           
           <div className="space-y-4">
@@ -311,7 +311,7 @@ export default function AboutPage() {
           <Button asChild className="bg-primary hover:bg-primary/90 h-12 rounded-xl font-semibold">
             <Link href="/">Home →</Link>
           </Button>
-          <Button asChild className="bg-secondary hover:bg-secondary/90 h-12 rounded-xl font-semibold text-white">
+          <Button asChild className="bg-secondary hover:bg-secondary/90 h-12 rounded-xl font-semibold text-white dark:text-secondary-foreground">
             <Link href="/dashboard">Dashboard →</Link>
           </Button>
           <Button asChild variant="outline" className="h-12 rounded-xl font-semibold">

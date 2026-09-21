@@ -10,9 +10,9 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-blue-50 to-background">
+    <div className="min-h-screen bg-gradient-to-b from-background via-blue-50 dark:via-blue-950/30 to-background">
       {/* Navigation */}
-      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-border">
+      <nav className="sticky top-0 z-50 bg-white/80 dark:bg-background/80 backdrop-blur-xl border-b border-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center text-white font-bold">
@@ -24,6 +24,7 @@ export default function Home() {
           <div className="hidden md:flex items-center gap-8">
             <Link href="#features" className="text-sm text-foreground/70 hover:text-primary transition">Features</Link>
             <Link href="/dashboard" className="text-sm text-foreground/70 hover:text-primary transition">Dashboard</Link>
+            <Link href="/temples" className="text-sm text-foreground/70 hover:text-primary transition">Temples</Link>
             <Link href="/analytics" className="text-sm text-foreground/70 hover:text-primary transition">Analytics</Link>
             <Link href="/about" className="text-sm text-foreground/70 hover:text-primary transition">About</Link>
           </div>
@@ -85,13 +86,13 @@ export default function Home() {
           {/* Dashboard Preview Card */}
           <div className="relative">
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl blur-3xl"></div>
-            <Card className="relative bg-white/50 backdrop-blur-xl border border-white/60 rounded-2xl p-6 shadow-2xl">
+            <Card className="relative bg-white/50 dark:bg-card/50 backdrop-blur-xl border border-white/60 dark:border-white/10 rounded-2xl p-6 shadow-2xl">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-sm font-semibold text-primary">Live Crowd Density</span>
                   <div className="w-3 h-3 bg-emerald-500 rounded-full animate-pulse"></div>
                 </div>
-                <div className="h-32 bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl relative overflow-hidden">
+                <div className="h-32 bg-gradient-to-r from-blue-100 dark:from-blue-900/30 to-purple-100 rounded-xl relative overflow-hidden">
                   <div className="absolute inset-0 opacity-50">
                     <svg className="w-full h-full" viewBox="0 0 100 100">
                       <rect x="10" y="20" width="15" height="15" fill="#EA6E3C" opacity="0.8" />
@@ -109,13 +110,13 @@ export default function Home() {
                 </div>
                 
                 <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-blue-50 rounded-xl p-3 border border-blue-100">
+                  <div className="bg-blue-50 dark:bg-blue-950/40 rounded-xl p-3 border border-blue-100 dark:border-blue-900">
                     <p className="text-xs text-foreground/60">Risk Level</p>
-                    <p className="text-lg font-bold text-blue-600">⚠️ Warning</p>
+                    <p className="text-lg font-bold text-blue-600 dark:text-blue-400">⚠️ Warning</p>
                   </div>
-                  <div className="bg-green-50 rounded-xl p-3 border border-green-100">
+                  <div className="bg-green-50 rounded-xl p-3 border border-green-100 dark:border-green-900">
                     <p className="text-xs text-foreground/60">Alerts</p>
-                    <p className="text-lg font-bold text-green-600">3 Active</p>
+                    <p className="text-lg font-bold text-green-600 dark:text-green-400">3 Active</p>
                   </div>
                 </div>
 
@@ -166,7 +167,7 @@ export default function Home() {
               description: '99.2% accuracy with sub-second response times'
             }
           ].map((feature, idx) => (
-            <Card key={idx} className="bg-white/40 backdrop-blur-sm border border-white/60 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:bg-white/60">
+            <Card key={idx} className="bg-white/40 backdrop-blur-sm border border-white/60 dark:border-white/10 rounded-2xl p-6 hover:shadow-lg transition-all duration-300 hover:bg-white/60">
               <feature.icon className="w-10 h-10 text-primary mb-4" />
               <h3 className="text-lg font-semibold text-foreground mb-2">{feature.title}</h3>
               <p className="text-foreground/70 text-sm leading-relaxed">{feature.description}</p>
